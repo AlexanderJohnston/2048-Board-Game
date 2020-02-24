@@ -7,12 +7,14 @@ namespace BoardGame
 {
     public class Board
     {
+        public int Dimensions;
         public Random _rnd;
         public Cell[,] Spaces;
 
         /// <param name="dimensionalSize">Sets the number of spaces in the X and Y dimensions.</param>
         public Board(int dimensionalSize)
         {
+            Dimensions = dimensionalSize;
             _rnd = new Random();
             Spaces = new Cell[dimensionalSize, dimensionalSize];
             for (int x = 0; x < dimensionalSize; x++)
@@ -53,6 +55,42 @@ namespace BoardGame
             var spaces = EmptySpaces(out var length);
             if (spaces.Count > 0) 
                 spaces[_rnd.Next(length)].Value = 2;
+        }
+
+        public bool MoveCells(Moves move)
+        {
+            if (move == Moves.None)
+                return false;
+            switch (move)
+            {
+                case Moves.Up:
+                    MoveUp();
+                    break;
+                case Moves.Left:
+                    break;
+                case Moves.Down:
+                    break;
+                case Moves.Right:
+                    break;
+            }
+
+            return true;
+        }
+
+        public void MoveUp()
+        {
+            var columns = 0;
+
+            for (var row = Dimensions - 1; row >= 0; row--)
+            {
+                for (var column = 0; column < Dimensions; column++)
+                {
+                    var selected = Spaces[row, column];
+                    if (selected.IsEmpty())
+                        return;
+                    
+                }
+            }
         }
     }
 }

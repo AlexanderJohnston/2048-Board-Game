@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoardGame;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +33,7 @@ namespace Graphics
             var validKeys = new Input (new Keys[] { Keys.Up, Keys.Left, Keys.Down, Keys.Right });
             if (validKeys.Contains(keyData))
             {
+                Game.Logic.MoveCells(validKeys.ConvertKeyToMove(keyData));
                 Game.ReadyForNewValue = true;
                 Game.Invalidate(); // Re-paint the board.
                 return true;
@@ -52,6 +54,23 @@ namespace Graphics
             }
 
             public bool Contains(Keys key) => AllowableKeys.Any(allowed => key == allowed);
+
+            public Moves ConvertKeyToMove(Keys key)
+            {
+                switch (key)
+                {
+                    case Keys.Up:
+                        return Moves.Up;
+                    case Keys.Left:
+                        return Moves.Left;
+                    case Keys.Down:
+                        return Moves.Down;
+                    case Keys.Right:
+                        return Moves.Right;
+                    default:
+                        return Moves.None;
+                }
+            }
         }
     }
 }

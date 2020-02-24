@@ -31,7 +31,7 @@ namespace Graphics
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            
+
             // Add a 2 somewhere on the board in an empty space then draw it for interaction.
             if (ReadyForNewValue)
             {
